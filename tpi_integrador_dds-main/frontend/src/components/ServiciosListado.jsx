@@ -1,6 +1,6 @@
 // src/components/ServiciosListado.jsx
 import React, { useState, useEffect } from 'react';
-import { servicioListadoService } from '../services/serviciosListado.service';
+import { serviciosListadoService } from '../services/serviciosListado.service';
 import arrayServiciosListado from '../datos-mock/serviciosListado-mock';
 
 function ServiciosListado() {
@@ -8,12 +8,12 @@ function ServiciosListado() {
   const [serviciosListado, setServiciosListado] = useState(arrayServiciosListado);
 
   useEffect(() => {
-    BuscarServicioListado();
+    BuscarServiciosListado();
   }, []);
 
-  async function BuscarServicioListado() {
+  async function BuscarServiciosListado() {
     try {
-      let data = await servicioListadoService.Buscar();
+      let data = await serviciosListadoService.Buscar();
       setServiciosListado(data);
     } catch (error) {
       console.error('Error al buscar servicios listado:', error);
@@ -32,10 +32,10 @@ function ServiciosListado() {
         </thead>
         <tbody>
           {serviciosListado &&
-            serviciosListado.map((servicio) => (
-              <tr key={servicio.IdServiciosListado}>
-                <td>{servicio.IdServiciosListado}</td>
-                <td>{servicio.Nombre}</td>
+            serviciosListado.map((servicios) => (
+              <tr key={servicios.IdServiciosListado}>
+                <td>{servicios.IdServiciosListado}</td>
+                <td>{servicios.Nombre}</td>
               </tr>
             ))}
         </tbody>
@@ -44,4 +44,4 @@ function ServiciosListado() {
   );
 }
 
-export default ServiciosListado;
+export { ServiciosListado };

@@ -4,7 +4,7 @@ import { config } from '../config';
 
 const { urlResourceServiciosListado } = config;
 
-export const servicioListadoService = {
+export const serviciosListadoService = {
   Buscar
 };
 
