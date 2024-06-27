@@ -27,7 +27,6 @@ const ServiciosListado = sequelize.define(
         },
       },
     },
-
   },
 
   {
@@ -43,7 +42,6 @@ const ServiciosListado = sequelize.define(
   }
 );
 
-//
 const Habitaciones = sequelize.define(
   "habitaciones",
   {
@@ -99,13 +97,12 @@ const Habitaciones = sequelize.define(
     timestamps: false,
   }
 );
-//
 
-// CAMBIAR ACA
-const Peliculas = sequelize.define(
-  "peliculas",
+// CAMBIAR ACA PARA LOS MODELOS DE CLIENTES Y RESERVAS
+const Clientes = sequelize.define(
+  "clientes",
   {
-    IdPelicula: {
+    IdCliente: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -116,7 +113,7 @@ const Peliculas = sequelize.define(
       validate: {
         notEmpty: {
           args: true,
-          msg: "El nombre de la pelicula es requerido",
+          msg: "El nombre del cliente es requerido",
         },
         len: {
           args: [5, 30],
@@ -124,70 +121,37 @@ const Peliculas = sequelize.define(
         },
       },
     },
-    FechaPublicacion: {
+    Email: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isEmail: {
+          args: true,
+          msg: "Email debe ser una dirección de correo electrónico válida",
+        },
+      },
     },
-    IdDirector: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    Duracion: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    Recaudacion: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-  },
-  {
-    timestamps: false,
-  }
-);
-
-//
-const Directores = sequelize.define(
-  "directores",
-  {
-    IdDirector: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    Nombre: {
+    Telefono: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: {
           args: true,
-          msg: "El nombre del director es requerido",
+          msg: "El teléfono del cliente es requerido",
         },
         len: {
-          args: [5, 30],
-          msg: "Nombre debe ser tipo caracteres, entre 5 y 30 de longitud",
+          args: [7, 15],
+          msg: "El teléfono debe tener entre 7 y 15 caracteres",
         },
       },
-    },
-    FechaNacimiento: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
-    PaisOrigen: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    NumPeliculasDirigidas: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
     },
   },
   {
     // pasar a mayusculas
     hooks: {
-      beforeValidate: function (director, options) {
-        if (typeof director.Nombre === "string") {
-          director.Nombre = director.Nombre.toUpperCase().trim();
+      beforeValidate: function (cliente, options) {
+        if (typeof cliente.Nombre === "string") {
+          cliente.Nombre = cliente.Nombre.toUpperCase().trim();
         }
       },
     },
@@ -195,21 +159,21 @@ const Directores = sequelize.define(
   }
 );
 
-const Canciones = sequelize.define(
-  "canciones",
+const Reservas = sequelize.define(
+  "reservas",
   {
-    IdCancion: {
+    IdReserva: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    Nombre: {
+    Cliente: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: {
           args: true,
-          msg: "El nombre de la cancion es requerido",
+          msg: "El nombre del cliente es requerido",
         },
         len: {
           args: [5, 30],
@@ -217,66 +181,40 @@ const Canciones = sequelize.define(
         },
       },
     },
-    FechaLanzamiento: {
-      type: DataTypes.STRING,
+    Fecha: {
+      type: DataTypes.DATE,
       allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "La fecha de la reserva es requerida",
+        },
+      },
     },
-    IdArtista: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    Duracion: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    Genero: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  {
-    timestamps: false,
-  }
-);
-
-//
-const Artistas = sequelize.define(
-  "artistas",
-  {
-    IdArtista: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    Nombre: {
+    Habitacion: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         notEmpty: {
           args: true,
-          msg: "El nombre del artista es requerido",
+          msg: "El nombre de la habitación es requerido",
         },
         len: {
-          args: [5, 30],
-          msg: "Nombre debe ser tipo caracteres, entre 5 y 30 de longitud",
+          args: [1, 10],
+          msg: "Nombre de la habitación debe ser tipo caracteres, entre 1 y 10 de longitud",
         },
       },
-    },
-    PaisOrigen: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    NumDeAlbums: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
     },
   },
   {
     // pasar a mayusculas
     hooks: {
-      beforeValidate: function (director, options) {
-        if (typeof director.Nombre === "string") {
-          director.Nombre = director.Nombre.toUpperCase().trim();
+      beforeValidate: function (reserva, options) {
+        if (typeof reserva.Cliente === "string") {
+          reserva.Cliente = reserva.Cliente.toUpperCase().trim();
+        }
+        if (typeof reserva.Habitacion === "string") {
+          reserva.Habitacion = reserva.Habitacion.toUpperCase().trim();
         }
       },
     },
@@ -288,7 +226,8 @@ module.exports = {
   sequelize,
   ServiciosListado,
   Habitaciones,
-  
+  Clientes,  // <-- añadido
+  Reservas,  // <-- añadido
   Directores,
   Peliculas,
   Artistas,
