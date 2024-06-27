@@ -33,7 +33,6 @@ function HabitacionesJWT() {
           <tr>
             <th style={{ width: "20%" }}>IdHabitaciones</th>
             <th style={{ width: "50%" }}>Nombre</th>
-            <th style={{ width: "30%" }}>Precio</th>
           </tr>
         </thead>
         <tbody>
@@ -42,7 +41,6 @@ function HabitacionesJWT() {
               <tr key={serviciosListado.IdServiciosListado}>
                 <td>{serviciosListado.IdServiciosListado}</td>
                 <td>{serviciosListado.Nombre}</td>
-                <td>{serviciosListado.Precio}</td>
               </tr>
             ))}
         </tbody>

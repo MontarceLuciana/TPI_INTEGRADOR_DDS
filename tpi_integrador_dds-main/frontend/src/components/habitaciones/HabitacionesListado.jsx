@@ -18,9 +18,8 @@ export default function HabitacionesListado({
         <thead>
           <tr>
             <th className="text-center">Nombre</th>
+            <th className="text-center">Fecha Ingreso</th>
             <th className="text-center">Precio</th>
-            <th className="text-center">Camas</th>
-            <th className="text-center">Fecha de Ingreso</th>
             <th className="text-center">Disponible</th>
             <th className="text-center text-nowrap">Acciones</th>
           </tr>
@@ -30,12 +29,11 @@ export default function HabitacionesListado({
             Items.map((Item) => (
               <tr key={Item.IdHabitaciones}>
                 <td>{Item.Nombre}</td>
-                <td className="text-end">{Item.Precio}</td>
-                <td className="text-end">{Item.Camas}</td>
                 <td className="text-end">
                   {moment(Item.FechaIngreso).format("DD/MM/YYYY")}
                 </td>
-                <td>{Item.Activo ? "SI" : "NO"}</td>
+                <td className="text-end">{Item.Precio}</td>
+                <td>{Item.Disponible ? "SI" : "NO"}</td>
                 <td className="text-center text-nowrap">
                   <button
                     className="btn btn-sm btn-outline-primary"
@@ -54,15 +52,15 @@ export default function HabitacionesListado({
                   <button
                     className={
                       "btn btn-sm " +
-                      (Item.Activo
+                      (Item.Disponible
                         ? "btn-outline-danger"
                         : "btn-outline-success")
                     }
-                    title={Item.Activo ? "Desactivar" : "Activar"}
+                    title={Item.Disponible ? "Deshabilitar" : "Habilitar"}
                     onClick={() => ActivarDesactivar(Item)}
                   >
                     <i
-                      className={"fa fa-" + (Item.Activo ? "times" : "check")}
+                      className={"fa fa-" + (Item.Disponible ? "times" : "check")}
                     ></i>
                   </button>
                 </td>
@@ -103,4 +101,4 @@ export default function HabitacionesListado({
       </div>
     </div>
   );
-}
+}          

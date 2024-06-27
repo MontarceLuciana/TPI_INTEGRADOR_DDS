@@ -91,8 +91,6 @@ import AuthService from "../../services/auth.service";
         </form>
       </main>
     </div>
-
-
   </>
   );
 }

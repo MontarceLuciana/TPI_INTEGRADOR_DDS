@@ -12,15 +12,15 @@ import { HabitacionesJWT } from './components/habitacionesJWT/HabitacionesJWT';
 
 function App() {
   return (
-    <Router>
-      <>
+    <>
+      <BrowserRouter>
         <ModalDialog />
         <Menu />
         <div className="divBody">
           <Routes>
             <Route path="/inicio" element={<Inicio />} />
             <Route path="/serviciosListado" element={<ServiciosListado />} />
-            <Route path="/habitaciones" element={<Habitaciones />} />
+            <Route path="/habitaciones" element={<Libros />} />
             <Route
               path="/habitacionesjwt"
               element={
@@ -29,15 +29,35 @@ function App() {
                 </RequireAuth>
               }
             />
+            <Route path="/directores" element={<Directores />} />
+            <Route path="/peliculas" element={<Peliculas />} />
+            <Route
+              path="/peliculasJWT"
+              element={
+                <RequireAuth>
+                  
+                  <PeliculasJWT />
+                </RequireAuth>
+              }
+            />
+            <Route path="/artistas" element={<Artistas />} />
+            <Route path="/canciones" element={<Canciones />} />
+            <Route
+              path="/cancionesjwt"
+              element={
+                <RequireAuth>
+                  <CancionesJWT />
+                </RequireAuth>
+              }
+            />
             <Route path="/login/:componentFrom" element={<Login />} />
             <Route path="*" element={<Navigate to="/inicio" replace />} />
           </Routes>
         </div>
         <Footer />
-      </>
-    </Router>
+      </BrowserRouter>
+    </>
   );
 }
-
 export default App;
 

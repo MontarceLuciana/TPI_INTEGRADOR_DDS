@@ -1,19 +1,13 @@
-// src/services/serviciosListado.service.js
-import axios from 'axios';
-import { config } from '../config';
+import axios from "axios";
 
-const { urlResourceServiciosListado } = config;
-
-export const serviciosListadoService = {
-  Buscar
-};
+//const urlResource = "https://labsys.frc.utn.edu.ar/dds-express/api/autores";
+import { config } from "../config";
+const urlResource = config.urlResourceServiciosListado;
 
 async function Buscar() {
-  try {
-    const response = await axios.get(urlResourceServiciosListado);
-    return response.data;
-  } catch (error) {
-    console.error('Error al buscar servicios listado:', error);
-    throw error;
-  }
+  const resp = await axios.get(urlResource);
+  return resp.data;
 }
+export const serviciosListadoService = {
+  Buscar,
+};

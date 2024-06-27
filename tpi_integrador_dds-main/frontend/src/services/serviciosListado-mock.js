@@ -3,12 +3,12 @@ import arrayServiciosListado from '../datos-mock/serviciosListado-mock';
 
 // Función asíncrona para buscar todas las habitaciones (simula consulta a base de datos)
 async function Buscar() {
-    return arrayServiciosListado;
+    return arrayServiciosListado.find((serviciosListado) => serviciosListado.IdServiciosListado === IdServicioListado);;
 }
 
-// Función asíncrona para buscar una habitación por su Id
-async function BuscarPorId(IdServicioListado) {
-    return arrayServiciosListado.find((serviciosListado) => serviciosListado.IdServiciosListado === IdServicioListado);
+// Función asíncrona para buscar habitaciones por ID
+async function BuscarPorId(IdServiciosListado) {
+    return arrayServiciosListado.find((serviciosListado) => serviciosListado.IdServiciosListado === IdServiciosListado);
 }
 
 // Función asíncrona para agregar una nueva habitación
@@ -19,17 +19,17 @@ async function Agregar(serviciosListado) {
 
 // Función asíncrona para modificar una habitación existente
 async function Modificar(serviciosListado) {
-    let index = arrayServiciosListado.findIndex((af) => af.IdServiciosListado === serviciosListado.IdServicioListado);
-    if (index !== -1) {
-        arrayServiciosListado[index].Nombre = serviciosListado.Nombre;
+    let serviciosListadoEncontrado = arrayServiciosListado.find((serviciosListadofind) => serviciosListadofind.IdServiciosListado === serviciosListado.IdServicioListado);
+    if (serviciosListadoEncontrado) {
+        serviciosListadoEncontrado.Nombre = serviciosListado.Nombre;
     }
 }
 
 // Función asíncrona para eliminar una habitación por su Id
-async function Eliminar(IdServicioListado) {
-    let index = arrayServiciosListado.findIndex((af) => af.IdServiciosListado === IdServicioListado);
-    if (index !== -1) {
-        arrayServiciosListado.splice(index, 1);
+async function Eliminar(IdServiciosListado) {
+    let serviciosListadoEncontrado = arrayServiciosListado.find((serviciosListadofind) => serviciosListadofind.IdServiciosListado === IdServiciosListado);
+    if (serviciosListadoEncontrado) {
+        arrayServiciosListado.splice(arrayServiciosListado.indexOf(serviciosListadoEncontrado), 1);
     }
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-export default function HabitacionesBuscar ({Nombre, setNombre, Activo, setActivo, Buscar, Agregar}) {
+export default function HabitacionesBuscar ({Nombre, setNombre, Buscar, Agregar}) {
 
     return (
     <form>
@@ -18,20 +18,6 @@ export default function HabitacionesBuscar ({Nombre, setNombre, Activo, setActiv
               autoFocus
             />
           </div>
-          <div className="col-sm-4 col-md-2">
-            <label className="col-form-label">Activo:</label>
-          </div>
-          <div className="col-sm-8 col-md-4">
-            <select
-              className="form-control"
-              onChange={(e) => setActivo(e.target.value)}
-              value={Activo}
-            >
-              <option value={""}></option>
-              <option value={false}>NO</option>
-              <option value={true}>SI</option>
-            </select>
-          </div>
         </div>
   
         <hr />
@@ -39,23 +25,33 @@ export default function HabitacionesBuscar ({Nombre, setNombre, Activo, setActiv
         {/* Botones */}
         <div className="row">
           <div className="col text-center botones">
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => Buscar(1) }
-          >
-            <i className="fa fa-search"> </i> Buscar
-          </button>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => Agregar() }
-          >
-            <i className="fa fa-plus"> </i> Agregar
-          </button>
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => Buscar(1)}
+            >
+              <i className="fa fa-list"> </i> Listar todo
+            </button>
+
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => Buscar(1)}
+            >
+              <i className="fa fa-search"> </i> Buscar
+            </button>
+
+            <button
+              type="button"
+              className="btn btn-primary"
+              onClick={() => Agregar()}
+            >
+              <i className="fa fa-plus"> </i> Agregar
+            </button>
           </div>
         </div>
       </div>
     </form>
-    )
-  };
+  );
+}
+

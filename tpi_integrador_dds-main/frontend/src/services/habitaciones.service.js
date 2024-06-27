@@ -1,7 +1,10 @@
-import {config} from "../config";
 import httpService from "./http.service";
+//const urlResource = "https://labsys.frc.utn.edu.ar/dds-express/api/libros";
 
-const urlResource = config.urlResourceHabitacionesJWT
+// mas adelante podemos usar un archivo de configuracion para el urlResource
+ import {config} from "../config";
+ const urlResource = config.urlResourceHabitaciones;
+
 
 async function Buscar(Nombre, Pagina) {
   const resp = await httpService.get(urlResource, {
@@ -31,6 +34,6 @@ async function Grabar(item) {
 }
 
 
-export const habitacionesJWTService = {
+export const habitacionesService = {
   Buscar,BuscarPorId,ActivarDesactivar,Grabar
 };

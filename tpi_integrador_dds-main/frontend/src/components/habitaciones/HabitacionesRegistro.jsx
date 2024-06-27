@@ -58,8 +58,61 @@ export default function HabitacionesRegistro({
             </div>
           </div>
 
-          {/* campo Precio */}
+
+          {/* campo FechaIngreso */}
           <div className="row">
+            <div className="col-sm-4 col-md-3 offset-md-1">
+              <label className="col-form-label" htmlFor="FechaIngreso">
+                Fecha Ingreso<span className="text-danger">*</span>:
+              </label>
+            </div>
+            <div className="col-sm-8 col-md-6">
+              <input
+                type="date"
+                {...register("FechaIngreso", {
+                  required: { value: true, message: "Fecha Ingreso es requerido" }
+                })}
+                className={
+                  "form-control " + (errors?.FechaIngreso ? "is-invalid" : "")
+                }
+              />
+              <div className="invalid-feedback">
+                {errors?.FechaIngreso?.message}
+              </div>
+            </div>
+          </div>
+
+          {/* campo IdServiciosListado */}
+          <div className="row">
+            <div className="col-sm-4 col-md-3 offset-md-1">
+              <label className="col-form-label" htmlFor="IdServiciosListado">
+                serviciosListado<span className="text-danger">*</span>:
+              </label>
+            </div>
+            <div className="col-sm-8 col-md-6">
+              <select
+                {...register("IdServiciosListado", {
+                  required: { value: true, message: "ServiciosListado es requerido" },
+                })}
+                className={
+                  "form-control " +
+                  (errors?.IdServiciosListado ? "is-invalid" : "")
+                }
+              >
+                <option value="" key={1}></option>
+                {ServiciosListado?.map((x) => (
+                  <option value={x.IdServiciosListado} key={x.IdServiciosListado}>
+                    {x.Nombre}
+                  </option>
+                ))}
+              </select>
+              <div className="invalid-feedback">
+                {errors?.IdServiciosListado?.message}
+              </div>
+            </div>
+          </div>
+                    {/* campo Precio */}
+                    <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="Precio">
                 Precio<span className="text-danger">*</span>:
@@ -87,104 +140,22 @@ export default function HabitacionesRegistro({
             </div>
           </div>
 
-          {/* campo Camas */}
+          
+          {/* campo Disponible */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="Camas">
-                Camas<span className="text-danger">*</span>:
-              </label>
-            </div>
-            <div className="col-sm-8 col-md-6">
-              <input
-                type="number"
-                {...register("Camas", {
-                  required: { value: true, message: "Camas es requerido" },
-                  min: {
-                    value: 0,
-                    message: "Camas debe ser mayor a 0",
-                  },
-                  max: {
-                    value: 99999,
-                    message: "Camas debe ser menor o igual a 999999",
-                  },
-                })}
-                className={
-                  "form-control " + (errors?.Camas ? "is-invalid" : "")
-                }
-              />
-              <div className="invalid-feedback">{errors?.Camas?.message}</div>
-            </div>
-          </div>
-
-
-          {/* campo IdServiciosListado */}
-          <div className="row">
-            <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="IdServiciosListado">
-                Servicios<span className="text-danger">*</span>:
+              <label className="col-form-label" htmlFor="Disponible">
+                Disponible<span className="text-danger">*</span>:
               </label>
             </div>
             <div className="col-sm-8 col-md-6">
               <select
-                {...register("IdServiciosListado", {
-                  required: { value: true, message: "Servicios es requerido" },
+                name="Disponible"
+                {...register("Disponible", {
+                  required: { value: true, message: "Disponible es requerido" },
                 })}
                 className={
-                  "form-control " +
-                  (errors?.IdServiciosListado? "is-invalid" : "")
-                }
-              >
-                <option value="" key={1}></option>
-                {ServiciosListado?.map((x) => (
-                  <option value={x.IdServiciosListado} key={x.IdServiciosListado}>
-                    {x.Nombre}
-                  </option>
-                ))}
-              </select>
-              <div className="invalid-feedback">
-                {errors?.IdServiciosListado?.message}
-              </div>
-            </div>
-          </div>
-
-          {/* campo FechaIngreso */}
-          <div className="row">
-            <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="FechaIngreso">
-                Fecha Ingreso<span className="text-danger">*</span>:
-              </label>
-            </div>
-            <div className="col-sm-8 col-md-6">
-              <input
-                type="date"
-                {...register("FechaIngreso", {
-                  required: { value: true, message: "Fecha Ingreso es requerido" }
-                })}
-                className={
-                  "form-control " + (errors?.FechaIngreso? "is-invalid" : "")
-                }
-              />
-              <div className="invalid-feedback">
-                {errors?.FechaIngreso?.message}
-              </div>
-            </div>
-          </div>
-
-          {/* campo Activo */}
-          <div className="row">
-            <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="Activo">
-                Activo<span className="text-danger">*</span>:
-              </label>
-            </div>
-            <div className="col-sm-8 col-md-6">
-              <select
-                name="Activo"
-                {...register("Activo", {
-                  required: { value: true, message: "Activo es requerido" },
-                })}
-                className={
-                  "form-control" + (errors?.Activo ? " is-invalid" : "")
+                  "form-control" + (errors?.Disponible ? " is-invalid" : "")
                 }
                 disabled
               >
@@ -192,7 +163,7 @@ export default function HabitacionesRegistro({
                 <option value={false}>NO</option>
                 <option value={true}>SI</option>
               </select>
-              <div className="invalid-feedback">{errors?.Activo?.message}</div>
+              <div className="invalid-feedback">{errors?.Disponible?.message}</div>
             </div>
           </div>
 

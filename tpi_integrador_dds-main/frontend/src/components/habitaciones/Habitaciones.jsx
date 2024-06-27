@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 
-import { serviciosService } from "../../services/servicios.service";
+import { habitacionesService } from "../../services/habitaciones.service";
 import { serviciosListadoService } from "../../services/serviciosListado.service";
+
 import modalDialogService from "../../services/modalDialog.service";
 
 import HabitacionesBuscar from "./HabitacionesBuscar";
@@ -48,7 +49,7 @@ function Habitaciones() {
       _pagina = Pagina;
     }
     modalDialogService.BloquearPantalla(true);
-    const data = await serviciosService.Buscar(Nombre, Activo, _pagina);
+    const data = await habitacionesService.Buscar(Nombre, Activo, _pagina);
     modalDialogService.BloquearPantalla(false);
     setItems(data.Items);
     setRegistrosTotal(data.RegistrosTotal);
@@ -62,7 +63,7 @@ function Habitaciones() {
   }
 
   async function BuscarPorId(item, accionABMC) {
-    const data = await serviciosService.BuscarPorId(item);
+    const data = await habitacionesService.BuscarPorId(item);
     setItem(data);
     setAccionABMC(accionABMC);
   }
@@ -82,13 +83,13 @@ function Habitaciones() {
   async function Agregar() {
     setAccionABMC("A");
     setItem({
-      IdServiciosListado: 0,
+      IdHabitaciones: 0,
       Nombre: "",
+      FechaIngreso: moment(new Date()).format("DD/MM/YYYY"),
+      //FechaIngreso: "",
+      IdServiciosListado: "",
       Precio: "",
-      Camas: "",
-      ServiciosListado: "",
-      FechaAlta: moment(new Date()).format("YYYY-MM-DD"),
-      Activo: true,
+      Disponible: true,
     });
     // modalDialogService.Alert("preparando el Alta...");
   }
@@ -106,7 +107,7 @@ function Habitaciones() {
       undefined,
       undefined,
       async () => {
-        await serviciosService.ActivarDesactivar(item);
+        await habitacionesService.ActivarDesactivar(item);
         await Buscar();
       }
     );
@@ -115,7 +116,7 @@ function Habitaciones() {
   async function Grabar(item) {
     // agregar o modificar
     try {
-      await serviciosService.Grabar(item);
+      await habitacionesService.Grabar(item);
     } catch (error) {
       modalDialogService.Alert(error?.response?.data?.message ?? error.toString());
       return;
@@ -147,14 +148,12 @@ function Habitaciones() {
         <HabitacionesBuscar
           Nombre={Nombre}
           setNombre={setNombre}
-          Activo={Activo}
-          setActivo={setActivo}
           Buscar={Buscar}
           Agregar={Agregar}
         />
       )}
 
-      {/* Tabla de resutados de busqueda y Paginador */}
+      {/* Tabla de resultados de busqueda y Paginador */}
       {AccionABMC === "L" && Items?.length > 0 && (
         <HabitacionesListado
           {...{

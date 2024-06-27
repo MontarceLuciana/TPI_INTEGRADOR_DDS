@@ -4,7 +4,7 @@ import { serviciosListadoService } from '../services/serviciosListado.service';
 import arrayServiciosListado from '../datos-mock/serviciosListado-mock';
 
 function ServiciosListado() {
-  const tituloPagina = 'Servicios Listado';
+  const tituloPagina = 'ServiciosListado';
   const [serviciosListado, setServiciosListado] = useState(arrayServiciosListado);
 
   useEffect(() => {
@@ -32,10 +32,10 @@ function ServiciosListado() {
         </thead>
         <tbody>
           {serviciosListado &&
-            serviciosListado.map((servicios) => (
-              <tr key={servicios.IdServiciosListado}>
-                <td>{servicios.IdServiciosListado}</td>
-                <td>{servicios.Nombre}</td>
+            serviciosListado.map((serviciosListado) => (
+              <tr key={serviciosListado.IdServiciosListado}>
+                <td>{serviciosListado.IdServiciosListado}</td>
+                <td>{serviciosListado.Nombre}</td>
               </tr>
             ))}
         </tbody>
