@@ -4,7 +4,7 @@ import httpService from "./http.service";
 import { config } from "../config";
 import AuthService from "./auth.service";
 
-const urlResource = config.urlResourceClientes;
+const urlResource = config.urlResourceClientesJWT;
 
 async function Buscar(Nombre, Pagina) {
   const resp = await httpService.get(urlResource, {

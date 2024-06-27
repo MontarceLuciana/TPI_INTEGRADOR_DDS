@@ -13,7 +13,8 @@ import { Clientes } from './components/clientes/Clientes';
 import { ClientesBuscar } from './components/clientes/ClientesBuscar';
 import { ClientesListado } from './components/clientes/ClientesListado';
 import { ClientesRegistro } from './components/clientes/ClientesRegistro';
-import { ClientesJWT } from './components/clientes/ClientesJWT';
+import { ClientesJWT } from './components/clientesJWT/ClientesJWT';
+import { HabitacionesJWT } from "./components/habitacionesJWT/habitacionesJWT";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
             <Route path="/serviciosListado" element={<ServiciosListado />} />
             <Route path="/habitaciones" element={<Habitaciones />} />
             <Route
-              path="/habitacionesjwt"
+              path="/habitacionesJWT"
               element={
                 <RequireAuth>
                   <HabitacionesJWT />
