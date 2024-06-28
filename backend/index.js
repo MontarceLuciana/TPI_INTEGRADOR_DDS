@@ -35,34 +35,27 @@ app.get("/", (req, res) => {
   res.send("dds-backend iniciado!");
 });
 
-const clientesmockRouter = require("./routes/clientesMock");
-app.use(clientesmockRouter);
+const serviciosListadomockRouter = require("./routes/serviciosListadoMock");
+app.use(serviciosListadomockRouter);
 
-const clientesRouter = require("./routes/clientes");
-app.use(clientesRouter);
+const serviciosListadoRouter = require("./routes/serviciosListado");
+app.use(serviciosListadoRouter);
 
+const habitacionesmockRouter = require("./routes/habitacionesMock");
+app.use(habitacionesmockRouter);
+
+//
 const reservasmockRouter = require("./routes/reservasMock");
 app.use(reservasmockRouter);
 
-//
 const reservasRouter = require("./routes/reservas");
 app.use(reservasRouter);
 
-const directoresmockRouter = require("./routes/directoresMock");
-app.use(directoresmockRouter);
-
-const peliculasRouter = require("./routes/peliculas");
-app.use(peliculasRouter);
+const clientesmockRouter = require("./routes/clientesMock");
+app.use(clientesmockRouter);
 //
 
-const artistasRouter = require("./routes/artistas");
-app.use(artistasRouter);
 
-const artistasmockRouter = require("./routes/artistasMock");
-app.use(artistasmockRouter);
-
-const cancionesRouter = require("./routes/canciones");
-app.use(cancionesRouter);
 //
 
 const seguridadRouter = require("./routes/seguridad");
