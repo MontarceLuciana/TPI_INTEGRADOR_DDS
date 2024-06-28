@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm } from "react-hook-form"; // Importa el useForm
 
 export default function ClientesRegistro({
   AccionABMC,
@@ -6,6 +7,8 @@ export default function ClientesRegistro({
   Grabar,
   Volver,
 }) {
+  const { handleSubmit, register } = useForm(); // Inicializa useForm
+
   const onSubmit = (data) => {
     Grabar(data);
   };
