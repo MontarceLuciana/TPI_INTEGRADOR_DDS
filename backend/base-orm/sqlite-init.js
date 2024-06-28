@@ -58,7 +58,7 @@ async function CrearBaseSiNoExiste() {
     // Si la tabla habitaciones no existe, la creamos
     await db.run(
       `CREATE TABLE habitaciones (IdHabitaciones INTEGER PRIMARY KEY AUTOINCREMENT, 
-                                    Nombre TEXT NOT NULL UNIQUE,
+                                    Nombre TEXT NOT NULL,
                                     FechaIngreso TEXT,
                                     IdServiciosListado INTEGER,
                                     Precio real,
