@@ -14,6 +14,7 @@ import  ClientesBuscar  from './components/clientes/ClientesBuscar';
 import  ClientesListado  from './components/clientes/ClientesListado';
 import  ClientesRegistro  from './components/clientes/ClientesRegistro';
 import { ClientesJWT } from './components/clientesJWT/ClientesJWT';
+import EmpleadosListado from './components/EmpleadosListado'; // Corrected import path
 import HabitacionesJWT from "./components/habitacionesJWT/HabitacionesJWT"; // Importa correctamente como exportación por defecto
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
             <Route path="/clientesListado" element={<ClientesListado />} />
             <Route path="/clientesRegistro" element={<ClientesRegistro />} />
             <Route path="/clientesJWT" element={<ClientesJWT />} />
+            <Route path="/empleados" element={<EmpleadosListado/>} />
             <Route path="/login/:componentFrom" element={<Login />} />
             <Route path="*" element={<Navigate to="/inicio" replace />} />
           </Routes>

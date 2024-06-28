@@ -64,7 +64,7 @@ function Menu() {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/empleadosListado">
+              <NavLink className="nav-link" to="/empleados">
                 Empleados
               </NavLink>
             </li>
