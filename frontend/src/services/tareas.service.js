@@ -17,14 +17,16 @@ async function BuscarPorId(id) {
 }
 
 async function Eliminar(id) {
+  console.log(urlResource + "/" + id);
   await httpService.delete(urlResource + "/" + id);
+  
 }
 
 async function Grabar(item) {
-  if (item.IdTarea === 0) {
-    await httpService.post(urlResource, item);
+  if (item.IdTarea) {
+    await httpService.put(urlResource + "/" + item.IdTarea, { Descripcion: item.Nombre });
   } else {
-    await httpService.put(urlResource + "/" + item.IdTarea, item);
+    await httpService.post(urlResource, { Descripcion: item.Nombre });
   }
 }
 

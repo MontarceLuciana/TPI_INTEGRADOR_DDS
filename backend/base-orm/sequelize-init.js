@@ -314,6 +314,8 @@ const Tareas = sequelize.define('tareas', {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+}, {
+  timestamps: false,
 });
 
 module.exports = {

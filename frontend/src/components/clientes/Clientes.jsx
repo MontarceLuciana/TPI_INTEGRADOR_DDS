@@ -33,7 +33,7 @@ function Clientes() {
     modalDialogService.BloquearPantalla(true);
     const data = await clientesService.Buscar(Nombre, Apellido, _pagina);
     modalDialogService.BloquearPantalla(false);
-    setItems(data.Items);
+    setItems(data);
     setRegistrosTotal(data.RegistrosTotal);
 
     const arrPaginas = [];

@@ -30,8 +30,22 @@ function Tareas() {
 
   // cargar al "montar" el componente, solo la primera vez (por la dependencia [])
   useEffect(() => {
-    Buscar();
-  }, []);
+    async function BuscarTareas() {
+      modalDialogService.BloquearPantalla(true);
+      const data = await tareasService.Buscar(Nombre, Pagina);
+      modalDialogService.BloquearPantalla(false);
+      setItems(data.Items);
+      setRegistrosTotal(data.RegistrosTotal);
+
+      const arrPaginas = [];
+      for (let i = 1; i <= Math.ceil(data.RegistrosTotal / 10); i++) {
+        arrPaginas.push(i);
+      }
+      setPaginas(arrPaginas);
+    }
+
+    BuscarTareas();
+  }, [Nombre, Pagina]);
 
   async function Buscar(_pagina) {
     if (_pagina && _pagina !== Pagina) {
@@ -56,7 +70,8 @@ function Tareas() {
   }
 
   async function BuscarPorId(item, accionABMC) {
-    const data = await tareasService.BuscarPorId(item);
+    const data = await tareasService.BuscarPorId(item.IdTarea);
+    console.log(data, accionABMC)
     setItem(data);
     setAccionABMC(accionABMC);
   }
@@ -87,7 +102,7 @@ function Tareas() {
       undefined,
       undefined,
       async () => {
-        await tareasService.Eliminar(item);
+        await tareasService.Eliminar(item.IdTarea);
         await Buscar();
       }
     );

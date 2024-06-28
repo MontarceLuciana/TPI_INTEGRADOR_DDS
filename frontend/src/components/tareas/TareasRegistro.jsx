@@ -8,14 +8,16 @@ export default function TareasRegistro({
   Grabar,
   Volver,
 }) {
+  
   const {
     register,
     handleSubmit,
     formState: { errors, touchedFields, isValid, isSubmitted },
-  } = useForm({ defaultValues: Item });
+  } = useForm({ defaultValues: { "Nombre": Item.Descripcion }});
 
   const onSubmit = (data) => {
-    Grabar(data);
+    const body = Item.IdTarea !== 0 ? { IdTarea: Item.IdTarea, ...data } : data;
+    Grabar(body);
   };
 
   return (
