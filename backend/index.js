@@ -50,6 +50,8 @@ app.use(reservasmockRouter);
 const reservasRouter = require("./routes/reservas");
 app.use(reservasRouter);
 
+const clienteskRouter = require("./routes/clientes");
+app.use(clienteskRouter);
 const clientesRouter = require("./routes/clientes");
 app.use(clientesRouter);
 
