@@ -1,6 +1,6 @@
 // src/components/ReservasListado.jsx
 import React, { useState, useEffect } from 'react';
-import { reservasService } from '../services/reservas.service';
+import { reservasService } from '../services/reserva.service';
 import arrayReservasMock from '../datos-mock/reservas-mock';
 
 function ReservasListado() {

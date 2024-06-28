@@ -41,7 +41,7 @@ app.use(serviciosListadomockRouter);
 const serviciosListadoRouter = require("./routes/serviciosListado");
 app.use(serviciosListadoRouter);
 
-const habitacionesmockRouter = require("./routes/habitacionesMock");
+const habitacionesmockRouter = require("./routes/habitaciones");
 app.use(habitacionesmockRouter);
 
 //

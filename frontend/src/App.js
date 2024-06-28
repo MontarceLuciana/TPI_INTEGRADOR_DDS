@@ -8,13 +8,13 @@ import { Habitaciones } from './components/habitaciones/Habitaciones';
 import { ModalDialog } from './components/ModalDialog';
 import { RequireAuth } from './components/RequiereAuth';
 import { Login } from './components/login/Login';
-import { ReservasListado } from './components/reservas/ReservasListado'; // Corrected import path
+import { ReservasListado } from './components/ReservasListado'; // Corrected import path
 import { Clientes } from './components/clientes/Clientes';
 import { ClientesBuscar } from './components/clientes/ClientesBuscar';
 import { ClientesListado } from './components/clientes/ClientesListado';
 import { ClientesRegistro } from './components/clientes/ClientesRegistro';
 import { ClientesJWT } from './components/clientesJWT/ClientesJWT';
-import { HabitacionesJWT } from "./components/habitacionesJWT/habitacionesJWT";
+import { HabitacionesJWT } from "./components/habitacionesJWT/HabitacionesJWT";
 
 function App() {
   return (

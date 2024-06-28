@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ClientesBuscar({
+function ClientesBuscar({
   Nombre,
   setNombre,
   Apellido,
@@ -72,3 +72,5 @@ export default function ClientesBuscar({
     </form>
   );
 }
+
+export default ClientesBuscar;
