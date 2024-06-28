@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-<<<<<<< HEAD
 async function Buscar() {
   try {
     const response = await axios.get('http://localhost:4000'); // Asegúrate de reemplazar con tu URL real
@@ -24,7 +23,6 @@ async function Buscar() {
     }
   }
 }
-=======
 const axiosInstance = axios.create({
   baseURL: 'http://localhost:4000', // Reemplaza con la URL base de tu API
   timeout: 5000, // Tiempo máximo de espera para las solicitudes (opcional)
@@ -34,4 +32,3 @@ const axiosInstance = axios.create({
 });
 
 export default axiosInstance;
->>>>>>> 144768ae13a77a5176737c0701b6a4042e34aada

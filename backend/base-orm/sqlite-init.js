@@ -100,11 +100,36 @@ async function CrearBaseSiNoExiste() {
     console.log("Tabla reservas creada!");
     await db.run(`
       INSERT INTO reservas (Cliente, Fecha, Habitacion) VALUES
-        ('Carlos', '2022-01-01', 'Simple'),
-        ('María', '2022-02-14', 'Doble'),
-        ('José', '2022-03-21', 'Triple'),
-        ('Ana', '2022-04-17', 'Cuadruple'),
-        ('Luis', '2022-05-19', 'Deluxe');
+        ('John Doe', '2024-06-27', '101'),
+    ('Jane Doe', '2024-06-28', '102'),
+    ('María González', '2024-06-29', '103'),
+    ('Carlos Pérez', '2024-06-30', '104'),
+    ('Sofía López', '2024-07-01', '105'),
+    ('Javier Gómez', '2024-07-02', '106'),
+    ('Valentina Fernández', '2024-07-03', '107'),
+    ('Martín Ramírez', '2024-07-04', '108'),
+    ('Lucía Martínez', '2024-07-05', '109'),
+    ('Mateo Sánchez', '2024-07-06', '110'),
+    ('Julieta Torres', '2024-07-07', '111'),
+    ('Federico Ruiz', '2024-07-08', '112'),
+    ('Camila Giménez', '2024-07-09', '113'),
+    ('Diego Rojas', '2024-07-10', '114'),
+    ('Micaela Castro', '2024-07-11', '115'),
+    ('Nicolás Morales', '2024-07-12', '116'),
+    ('Paula Herrera', '2024-07-13', '117'),
+    ('Agustín Ortiz', '2024-07-14', '118'),
+    ('Florencia Silva', '2024-07-15', '119'),
+    ('Francisco Romero', '2024-07-16', '120'),
+    ('Martina Mendoza', '2024-07-17', '121'),
+    ('Juan Cruz Navarro', '2024-07-18', '122'),
+    ('Santiago Álvarez', '2024-07-19', '123'),
+    ('Josefina Ruiz Díaz', '2024-07-20', '124'),
+    ('Tomás Ibáñez', '2024-07-21', '125'),
+    ('Emilia Peralta', '2024-07-22', '126'),
+    ('Renato Molina', '2024-07-23', '127'),
+    ('Lola Vázquez', '2024-07-24', '128'),
+    ('Ignacio Suárez', '2024-07-25', '129'),
+    ('Pilar Domínguez', '2024-07-26', '130');
     `);
   }
 
