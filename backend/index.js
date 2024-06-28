@@ -62,8 +62,8 @@ app.use(empleadosRouter);
 const empleadosmockRouter = require("./routes/empleadosMock");
 app.use(empleadosmockRouter);
 
-const tareas = require("./routes/tareas");
-app.use(tareas);
+const tareasRouter = require("./routes/tareas");
+app.use(tareasRouter);
 
 const tareasMock = require("./routes/tareasMock");
 app.use(tareasMock);

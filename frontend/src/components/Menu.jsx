@@ -63,6 +63,16 @@ function Menu() {
                 Reservas
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/empleadosListado">
+                Empleados
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/tareas">
+                Tareas
+              </NavLink>
+            </li>    
           </ul>
 
           <ul className="navbar-nav ms-auto">
