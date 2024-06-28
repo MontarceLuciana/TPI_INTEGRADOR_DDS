@@ -1,16 +1,19 @@
 import React from "react";
-import { useForm } from "react-hook-form"; // Importa el useForm
+import { useForm } from "react-hook-form";
+import axios from "axios"; // Importa Axios
 
-export default function ClientesRegistro({
-  AccionABMC,
-  Item,
-  Grabar,
-  Volver,
-}) {
-  const { handleSubmit, register } = useForm(); // Inicializa useForm
+export default function ClientesRegistro({ Grabar, Volver }) {
+  const { handleSubmit, register } = useForm();
 
-  const onSubmit = (data) => {
-    Grabar(data);
+  const onSubmit = async (data) => {
+    try {
+      // Realiza la solicitud POST a tu API usando Axios
+      const response = await axios.post("url_de_tu_api", data); // Reemplaza 'url_de_tu_api' con la URL real de tu API
+      console.log("Respuesta del servidor:", response.data);
+      Grabar(data); // Llama a la función Grabar después de la solicitud exitosa
+    } catch (error) {
+      console.error("Error al enviar datos:", error.message);
+    }
   };
 
   return (
