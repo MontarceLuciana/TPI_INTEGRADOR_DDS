@@ -228,8 +228,4 @@ module.exports = {
   Habitaciones,
   Clientes,  // <-- añadido
   Reservas,  // <-- añadido
-  Directores,
-  Peliculas,
-  Artistas,
-  Canciones,
 };
