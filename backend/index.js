@@ -44,7 +44,6 @@ app.use(serviciosListadoRouter);
 const habitacionesmockRouter = require("./routes/habitaciones");
 app.use(habitacionesmockRouter);
 
-//
 const reservasmockRouter = require("./routes/reservasMock");
 app.use(reservasmockRouter);
 
@@ -53,13 +52,23 @@ app.use(reservasRouter);
 
 const clienteskRouter = require("./routes/clientes");
 app.use(clienteskRouter);
+const clientesRouter = require("./routes/clientes");
+app.use(clientesRouter);
 
 const clientesmockRouter = require("./routes/clientesMock");
 app.use(clientesmockRouter);
-//
 
+const empleadosRouter = require("./routes/empleados");
+app.use(empleadosRouter);
 
-//
+const empleadosmockRouter = require("./routes/empleadosMock");
+app.use(empleadosmockRouter);
+
+const tareas = require("./routes/tareas");
+app.use(tareas);
+
+const tareasMock = require("./routes/tareasMock");
+app.use(tareasMock);
 
 const seguridadRouter = require("./routes/seguridad");
 app.use(seguridadRouter);

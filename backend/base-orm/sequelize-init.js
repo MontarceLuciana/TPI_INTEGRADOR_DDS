@@ -1,10 +1,10 @@
-// Configuramos ORM Sequelize
 const { Sequelize, DataTypes } = require("sequelize");
 // const sequelize = new Sequelize("sqlite:" + process.env.base);
 const sequelize = new Sequelize("sqlite:" + "./.data/hotel.db");
 
 // ######################### TO DO: Agregar HOOKS a los modelos para validar los datos
 // Definimos los modelos
+
 const ServiciosListado = sequelize.define(
   "serviciosListado",
   {
@@ -28,7 +28,6 @@ const ServiciosListado = sequelize.define(
       },
     },
   },
-
   {
     // pasar a mayusculas
     hooks: {
@@ -98,7 +97,6 @@ const Habitaciones = sequelize.define(
   }
 );
 
-// CAMBIAR ACA PARA LOS MODELOS DE CLIENTES Y RESERVAS
 const Clientes = sequelize.define(
   "clientes",
   {
@@ -222,10 +220,101 @@ const Reservas = sequelize.define(
   }
 );
 
+// Definimos los modelos de empleados y tareas
+
+const Empleados = sequelize.define(
+  "empleados",
+  {
+    IdEmpleado: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    Nombre: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "El nombre del empleado es requerido",
+        },
+        len: {
+          args: [5, 30],
+          msg: "Nombre debe ser tipo caracteres, entre 5 y 30 de longitud",
+        },
+      },
+    },
+    Cargo: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    // pasar a mayusculas
+    hooks: {
+      beforeValidate: function (empleado, options) {
+        if (typeof empleado.Nombre === "string") {
+          empleado.Nombre = empleado.Nombre.toUpperCase().trim();
+        }
+      },
+    },
+    timestamps: false,
+  }
+);
+
+const Tareas = sequelize.define(
+  "tareas",
+  {
+    IdTarea: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    Descripcion: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "La descripción de la tarea es requerida",
+        },
+        len: {
+          args: [5, 100],
+          msg: "Descripción debe ser tipo caracteres, entre 5 y 100 de longitud",
+        },
+      },
+    },
+    IdEmpleado: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    FechaAsignacion: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "La fecha de asignación es requerida",
+        },
+      },
+    },
+    Completada: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+  },
+  {
+    timestamps: false,
+  }
+);
+
 module.exports = {
   sequelize,
   ServiciosListado,
   Habitaciones,
-  Clientes,  // <-- añadido
-  Reservas,  // <-- añadido
+  Clientes,
+  Reservas,
+  Empleados,  // <-- añadido
+  Tareas,     // <-- añadido
 };

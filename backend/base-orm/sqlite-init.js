@@ -133,6 +133,67 @@ async function CrearBaseSiNoExiste() {
     `);
   }
 
+// Verificar y crear tabla empleados (estática)
+existe = false;
+res = await db.get("SELECT count(*) as contar FROM sqlite_master WHERE type = 'table' AND name = 'empleados'");
+if (res.contar > 0) existe = true;
+if (!existe) {
+  await db.run(`
+    CREATE TABLE empleados (
+      IdEmpleado INTEGER PRIMARY KEY AUTOINCREMENT,
+      Nombre TEXT NOT NULL,
+      Apellido TEXT NOT NULL,
+      Puesto TEXT NOT NULL,
+      FechaContratacion DATE NOT NULL
+    );
+  `);
+  console.log("Tabla empleados creada!");
+  await db.run(`
+    INSERT INTO empleados (Nombre, Apellido, Puesto, FechaContratacion) VALUES
+      ('Juan', 'Pérez', 'Recepcionista', '2022-01-01'),
+      ('María', 'González', 'Gerente', '2021-06-15'),
+      ('Carlos', 'Ramírez', 'Conserje', '2022-03-10'),
+      ('Ana', 'López', 'Cocinera', '2021-11-30'),
+      ('Luis', 'Martínez', 'Botones', '2022-04-25'),
+      ('Pedro', 'Sánchez', 'Mantenimiento', '2022-05-20'),
+      ('Lucía', 'Fernández', 'Limpieza', '2022-06-01'),
+      ('Miguel', 'Torres', 'Camarero', '2022-07-15'),
+      ('Sofía', 'Navarro', 'Recepcionista', '2022-08-10'),
+      ('Andrés', 'Mendoza', 'Seguridad', '2022-09-05');
+  `);
+}
+
+// Verificar y crear tabla tareas (dinámica)
+existe = false;
+res = await db.get("SELECT count(*) as contar FROM sqlite_master WHERE type = 'table' AND name = 'tareas'");
+if (res.contar > 0) existe = true;
+if (!existe) {
+  await db.run(`
+    CREATE TABLE tareas (
+      IdTarea INTEGER PRIMARY KEY AUTOINCREMENT,
+      Descripcion TEXT NOT NULL,
+      FechaInicio DATE NOT NULL,
+      FechaFin DATE,
+      IdEmpleado INTEGER,
+      FOREIGN KEY(IdEmpleado) REFERENCES empleados(IdEmpleado)
+    );
+  `);
+  console.log("Tabla tareas creada!");
+  await db.run(`
+    INSERT INTO tareas (Descripcion, FechaInicio, FechaFin, IdEmpleado) VALUES
+      ('Recepción de huéspedes', '2024-01-01', '2024-01-10', 1),
+      ('Gestión de reservas', '2024-01-02', '2024-01-11', 2),
+      ('Ayuda con el equipaje', '2024-01-03', '2024-01-12', 5),
+      ('Limpieza de habitaciones', '2024-01-04', '2024-01-13', 7),
+      ('Preparación de desayunos', '2024-01-05', '2024-01-14', 4),
+      ('Mantenimiento de piscina', '2024-01-06', '2024-01-15', 6),
+      ('Servicio en el restaurante', '2024-01-07', '2024-01-16', 8),
+      ('Control de seguridad', '2024-01-08', '2024-01-17', 10),
+      ('Atención en la recepción', '2024-01-09', '2024-01-18', 9),
+      ('Supervisión del personal', '2024-01-10', '2024-01-19', 2);
+  `);
+  }
+
   db.close(); // Cerramos la base de datos
 }
 
