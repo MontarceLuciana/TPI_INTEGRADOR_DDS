@@ -8,7 +8,7 @@ export default function ClientesRegistro({ Grabar, Volver }) {
   const onSubmit = async (data) => {
     try {
       // Realiza la solicitud POST a tu API usando Axios
-      const response = await axios.post("url_de_tu_api", data); // Reemplaza 'url_de_tu_api' con la URL real de tu API
+      const response = await axios.post("http://localhost:3000/clientes", data); // Reemplaza 'url_de_tu_api' con la URL real de tu API
       console.log("Respuesta del servidor:", response.data);
       Grabar(data); // Llama a la función Grabar después de la solicitud exitosa
     } catch (error) {
