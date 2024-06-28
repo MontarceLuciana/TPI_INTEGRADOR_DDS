@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 
-export default function ClientesListado({
+function ClientesListado({
   Items,
   Consultar,
   Modificar,
@@ -75,3 +75,5 @@ export default function ClientesListado({
     </div>
   );
 }
+
+export default ClientesListado;
