@@ -1,5 +1,5 @@
 // src/config.js
-const urlServidor = "http://localhost:3001"; // Ajusta según tu entorno
+const urlServidor = "http://localhost:4000"; // Ajusta según tu entorno
 
 const urlResourceHabitaciones = urlServidor + "/api/habitaciones";
 const urlResourceHabitacionesJWT = urlServidor + "/api/habitacionesjwt";
