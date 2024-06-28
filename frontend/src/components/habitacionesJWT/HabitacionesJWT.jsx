@@ -1,29 +1,23 @@
 import React, { useState, useEffect } from "react";
-import  {habitacionesJWTService}  from "../../services/habitacionesJWT.service";
-
-
-
+import { habitacionesJWTService } from "../../services/habitacionesJWT.service";
 
 function HabitacionesJWT() {
-  const tituloPagina = "Habitaciones JWT (solo para admintradores)";
-  const [habitaciones, setHabitaciones] = useState(null);
+  const tituloPagina = "Habitaciones JWT (solo para administradores)";
+  const [habitaciones, setHabitaciones] = useState(null); // Cambia a 'habitaciones'
 
-
-  // cargar al iniciar el componente, solo una vez
+  // Cargar al iniciar el componente, solo una vez
   useEffect(() => {
     BuscarHabitacionesJWT();
   }, []);
 
-
   async function BuscarHabitacionesJWT() {
-     try {
+    try {
       let data = await habitacionesJWTService.Buscar();
       setHabitaciones(data);
     } catch (error) {
-      console.log("error al buscar datos en el servidor!")
+      console.log("Error al buscar datos en el servidor:", error);
     }
   }
-
 
   return (
     <>
@@ -36,11 +30,11 @@ function HabitacionesJWT() {
           </tr>
         </thead>
         <tbody>
-          {articulos &&
-            articulos.map((serviciosListado) => (
-              <tr key={serviciosListado.IdServiciosListado}>
-                <td>{serviciosListado.IdServiciosListado}</td>
-                <td>{serviciosListado.Nombre}</td>
+          {habitaciones &&
+            habitaciones.map((habitacion) => (
+              <tr key={habitacion.IdHabitaciones}>
+                <td>{habitacion.IdHabitaciones}</td>
+                <td>{habitacion.Nombre}</td>
               </tr>
             ))}
         </tbody>
@@ -49,7 +43,4 @@ function HabitacionesJWT() {
   );
 }
 
-
-export { HabitacionesJWT };
-
-
+export default HabitacionesJWT; // Exporta por defecto el componente HabitacionesJWT
