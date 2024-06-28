@@ -8,9 +8,30 @@ async function Buscar() {
   return resp.data;
 }
 
-// Otras funciones para agregar, modificar, eliminar reservas utilizando axios
+async function BuscarPorNombre(nombre) {
+  const resp = await axios.get(`${urlResource}?nombre=${nombre}`);
+  return resp.data;
+}
+
+async function Agregar(reserva) {
+  const resp = await axios.post(urlResource, reserva);
+  return resp.data;
+}
+
+async function Editar(id, reserva) {
+  const resp = await axios.put(`${urlResource}/${id}`, reserva);
+  return resp.data;
+}
+
+async function Eliminar(id) {
+  const resp = await axios.delete(`${urlResource}/${id}`);
+  return resp.data;
+}
 
 export const reservasService = {
   Buscar,
-  // Agregar, Modificar, Eliminar, etc.
+  BuscarPorNombre,
+  Agregar,
+  Editar,
+  Eliminar,
 };
