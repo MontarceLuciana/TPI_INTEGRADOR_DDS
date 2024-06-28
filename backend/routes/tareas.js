@@ -7,7 +7,7 @@ const { Op, ValidationError } = require("sequelize");
 router.get("/api/tareas", async function (req, res, next) {
   try {
     let tareas = await db.Tareas.findAll({
-      attributes: ["IdTarea", "Descripcion", "FechaAsignacion", "Completada"],
+      attributes: ["IdTarea", "Descripcion", "FechaInicio", "FechaFin", "IdEmpleado"],
     });
     res.json(tareas);
   } catch (error) {
@@ -22,7 +22,7 @@ router.get("/api/tareas/:id", async function (req, res, next) {
     const id = parseInt(req.params.id);
     let tarea = await db.Tareas.findOne({
       where: { IdTarea: id },
-      attributes: ["IdTarea", "Descripcion", "FechaAsignacion", "Completada"],
+      attributes: ["IdTarea", "Descripcion", "FechaInicio", "FechaFin", "IdEmpleado"],
     });
     if (tarea) {
       res.json(tarea);
@@ -45,7 +45,7 @@ router.get("/api/tareas/buscar", async function (req, res, next) {
           [Op.like]: "%" + descripcion + "%",
         },
       },
-      attributes: ["IdTarea", "Descripcion", "FechaAsignacion", "Completada"],
+      attributes: ["IdTarea", "Descripcion", "FechaInicio", "FechaFin", "IdEmpleado"],
     });
     res.json(tareas);
   } catch (error) {
@@ -60,8 +60,8 @@ router.post("/api/tareas", async (req, res) => {
     let data = await db.Tareas.create({
       Descripcion: req.body.Descripcion,
       IdEmpleado: req.body.IdEmpleado,
-      FechaAsignacion: req.body.FechaAsignacion,
-      Completada: req.body.Completada,
+      FechaInicio: req.body.FechaInicio,
+      FechaFin: req.body.FechaFin,
     });
     res.status(200).json(data.dataValues); // Devolvemos el registro agregado
   } catch (err) {
@@ -89,8 +89,8 @@ router.put("/api/tareas/:id", async (req, res) => {
     }
     tarea.Descripcion = req.body.Descripcion;
     tarea.IdEmpleado = req.body.IdEmpleado;
-    tarea.FechaAsignacion = req.body.FechaAsignacion;
-    tarea.Completada = req.body.Completada;
+    tarea.FechaInicio = req.body.FechaInicio;
+    tarea.FechaFin = req.body.FechaFin;
     await tarea.save();
     res.sendStatus(204);
   } catch (err) {

@@ -262,52 +262,59 @@ const Empleados = sequelize.define(
   }
 );
 
-const Tareas = sequelize.define(
-  "tareas",
-  {
-    IdTarea: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    Descripcion: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: "La descripción de la tarea es requerida",
-        },
-        len: {
-          args: [5, 100],
-          msg: "Descripción debe ser tipo caracteres, entre 5 y 100 de longitud",
-        },
+const Tareas = sequelize.define('tareas', {
+  IdTarea: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  Descripcion: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        args: true,
+        msg: 'La descripción de la tarea es requerida',
       },
-    },
-    IdEmpleado: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    FechaAsignacion: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: "La fecha de asignación es requerida",
-        },
+      len: {
+        args: [5, 100],
+        msg: 'La descripción debe tener entre 5 y 100 caracteres de longitud',
       },
-    },
-    Completada: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false,
     },
   },
-  {
-    timestamps: false,
-  }
-);
+  FechaInicio: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        args: true,
+        msg: 'La fecha de inicio es requerida',
+      },
+      isDate: {
+        args: true,
+        msg: 'Debe ser una fecha válida',
+      },
+    },
+  },
+  FechaFin: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        args: true,
+        msg: 'La fecha de fin es requerida',
+      },
+      isDate: {
+        args: true,
+        msg: 'Debe ser una fecha válida',
+      },
+    },
+  },
+  IdEmpleado: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+});
 
 module.exports = {
   sequelize,
