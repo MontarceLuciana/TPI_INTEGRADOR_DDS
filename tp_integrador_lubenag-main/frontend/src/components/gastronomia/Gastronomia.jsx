@@ -54,13 +54,24 @@ async function Buscar(_pagina) {
   setItems(data.Items);
   setRegistrosTotal(data.RegistrosTotal);
 
+  try {
+    const data = await gastronomiaService.Buscar(Nombre, _pagina); // Asegúrate de pasar Nombre al servicio de búsqueda
+    setItems(data.Items);
+    setRegistrosTotal(data.RegistrosTotal);
+
   //generar array de las páginas para mostrar en select del paginador
   const arrPaginas = [];
   for (let i = 1; i <= Math.ceil(data.RegistrosTotal / 10); i++) {
     arrPaginas.push(i);
   }
   setPaginas(arrPaginas);
+} catch (error) {
+  modalDialogService.Alert(error?.response?.data?.message ?? error.toString());
 }
+
+modalDialogService.BloquearPantalla(false);
+}
+
   async function BuscarPorId(item, accionABMC) {
     const data = await gastronomiaService.BuscarPorId(item);
     setItem(data);
