@@ -99,7 +99,7 @@ async function Buscar(_pagina) {
       undefined,
       undefined,
       async () => {
-        await EventosService.Eliminar(item.IdEventos);
+        await gastronomiaService.Eliminar(item.IdGastronomia);
         await Buscar();
       }
     );
