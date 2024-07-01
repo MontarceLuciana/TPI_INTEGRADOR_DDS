@@ -16,7 +16,7 @@ export default function GastronomiaListado({
       <table className="table table-hover table-sm table-bordered table-striped">
         <thead>
           <tr>
-            <th className="text-center">IdGastronomia</th>
+            
             <th className="text-center">Nombre</th>
             <th className="text-center">Descripción</th>
             <th className="text-center">Precio</th>
@@ -27,8 +27,8 @@ export default function GastronomiaListado({
         <tbody>
           {Items &&
             Items.map((item) => (
-              <tr key={item.IdGastronomia}>
-                <td>{item.IdGastronomia}</td>
+              <tr key={item.Nombre}>
+        
                 <td>{item.Nombre}</td>
                 <td>{item.Descripcion}</td>
                 <td>{item.Precio}</td>
