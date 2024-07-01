@@ -58,25 +58,13 @@ function ReservasListado() {
   return (
     <div>
       <div className="tituloPagina">{tituloPagina}</div>
-      <div>
-        <input
-          type="text"
-          placeholder="Buscar por nombre"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button onClick={BuscarReservasPorNombre}>Buscar</button>
-        <button onClick={BuscarReservas}>Listar todo</button>
-        <button onClick={handleAgregarClick}>Agregar</button>
-      </div>
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
-            <th style={{ width: '15%' }}>IdReserva</th>
+            <th style={{ width: '25%' }}>IdReserva</th>
             <th style={{ width: '25%' }}>Cliente</th>
-            <th style={{ width: '20%' }}>Fecha</th>
-            <th style={{ width: '20%' }}>Habitacion</th>
-            <th style={{ width: '20%' }}>Acciones</th>
+            <th style={{ width: '25%' }}>Fecha</th>
+            <th style={{ width: '25%' }}>Habitacion</th>
           </tr>
         </thead>
         <tbody>
@@ -87,10 +75,6 @@ function ReservasListado() {
                 <td>{reserva.Cliente}</td>
                 <td>{reserva.Fecha}</td>
                 <td>{reserva.Habitacion}</td>
-                <td>
-                  <button onClick={() => handleEditarClick(reserva)}>Editar</button>
-                  <button onClick={() => handleEliminarClick(reserva.IdReserva)}>Eliminar</button>
-                </td>
               </tr>
             ))}
         </tbody>

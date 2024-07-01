@@ -1,5 +1,5 @@
 import React from 'react'; // Necesaria en StackBlitz
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 function Inicio() {
   return (

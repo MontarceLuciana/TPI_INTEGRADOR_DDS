@@ -1,26 +1,32 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios"; // Importa Axios
 
-export default function ClientesRegistro({ Grabar, Volver }) {
-  const { handleSubmit, register } = useForm();
+export default function ClientesRegistro({
+  AccionABMC,
+  Grabar,
+  Volver,
+  Item,
+}) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, touchedFields, isValid, isSubmitted },
+  } = useForm({
+    defaultValues: Item,
+  });
 
-  const onSubmit = async (data) => {
-    try {
-      // Realiza la solicitud POST a tu API usando Axios
-      const response = await axios.post("http://localhost:3000/clientes", data); // Reemplaza 'url_de_tu_api' con la URL real de tu API
-      console.log("Respuesta del servidor:", response.data);
-      Grabar(data); // Llama a la función Grabar después de la solicitud exitosa
-    } catch (error) {
-      console.error("Error al enviar datos:", error.message);
-    }
+  const onSubmit = (data) => {
+    Grabar(data);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="container-fluid">
-        <fieldset>
-          <div className="row">
+
+        <fieldset disabled={AccionABMC === "C"}>
+
+          {/* campo nombre */}
+          <div className="row mb-3">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="Nombre">
                 Nombre<span className="text-danger">*</span>:
@@ -29,47 +35,116 @@ export default function ClientesRegistro({ Grabar, Volver }) {
             <div className="col-sm-8 col-md-6">
               <input
                 type="text"
-                {...register("Nombre", { required: true })}
-                className="form-control"
-                maxLength="50"
+                {...register("Nombre", {
+                  required: { value: true, message: "Nombre es requerido" },
+                  minLength: {
+                    value: 1,
+                    message: "Nombre debe tener al menos 1 caracter",
+                  },
+                  maxLength: {
+                    value: 55,
+                    message: "Nombre debe tener como máximo 55 caracteres",
+                  },
+                })}
+                autoFocus
+                className={"form-control " + (errors?.Nombre ? "is-invalid" : "")}
               />
+              {errors?.Nombre && touchedFields.Nombre && (
+                <div className="invalid-feedback">
+                  {errors?.Nombre?.message}
+                </div>
+              )}
             </div>
           </div>
 
-          <div className="row">
+          {/* campo Email */}
+          <div className="row mb-3">
             <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="Apellido">
-                Apellido<span className="text-danger">*</span>:
+              <label className="col-form-label" htmlFor="Email">
+                Email<span className="text-danger">*</span>:
               </label>
             </div>
             <div className="col-sm-8 col-md-6">
               <input
-                type="text"
-                {...register("Apellido", { required: true })}
-                className="form-control"
-                maxLength="50"
+                type="email"
+                {...register("Email", {
+                  required: { value: true, message: "Email es requerido" },
+                  pattern: {
+                    value: /\S+@\S+\.\S+/,
+                    message: "Formato de Email inválido",
+                  },
+                })}
+                className={"form-control " + (errors?.Email ? "is-invalid" : "")}
               />
+              {errors?.Email && touchedFields.Email && (
+                <div className="invalid-feedback">
+                  {errors?.Email?.message}
+                </div>
+              )}
             </div>
           </div>
 
-          {/* Agregar más campos según tu modelo de datos de cliente */}
-
-          <div className="row">
-            <div className="col text-center botones">
-              <button type="submit" className="btn btn-primary">
-                <i className="fa fa-save"> </i> Grabar
-              </button>{" "}
-              &nbsp;
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => Volver()}
-              >
-                <i className="fa fa-arrow-left"> </i> Volver
-              </button>
+          {/* campo Telefono */}
+          <div className="row mb-3">
+            <div className="col-sm-4 col-md-3 offset-md-1">
+              <label className="col-form-label" htmlFor="Telefono">
+                Teléfono<span className="text-danger">*</span>:
+              </label>
+            </div>
+            <div className="col-sm-8 col-md-6">
+              <input
+                type="tel"
+                {...register("Telefono", {
+                  required: { value: true, message: "Teléfono es requerido" },
+                  minLength: {
+                    value: 7,
+                    message: "Teléfono debe tener al menos 7 caracteres",
+                  },
+                  maxLength: {
+                    value: 15,
+                    message: "Teléfono debe tener como máximo 15 caracteres",
+                  },
+                })}
+                className={"form-control " + (errors?.Telefono ? "is-invalid" : "")}
+              />
+              {errors?.Telefono && touchedFields.Telefono && (
+                <div className="invalid-feedback">
+                  {errors?.Telefono?.message}
+                </div>
+              )}
             </div>
           </div>
+
         </fieldset>
+
+        {/* Botones Grabar, Cancelar/Volver */}
+        <hr />
+        <div className="row justify-content-center">
+          <div className="col text-center botones">
+            {AccionABMC !== "C" && (
+              <button type="submit" className="btn btn-primary">
+                <i className="fa fa-check"></i> Grabar
+              </button>
+            )}
+            <button
+              type="button"
+              className="btn btn-warning"
+              onClick={() => Volver()}
+            >
+              <i className="fa fa-undo"></i>
+              {AccionABMC === "C" ? " Volver" : " Cancelar"}
+            </button>
+          </div>
+        </div>
+
+        {/* texto: Revisar los datos ingresados... */}
+        {!isValid && isSubmitted && (
+          <div className="row alert alert-danger mensajesAlert">
+            <i className="fa fa-exclamation-sign"></i>
+            Revisar los datos ingresados...
+          </div>
+        )}
+
       </div>
     </form>
   );

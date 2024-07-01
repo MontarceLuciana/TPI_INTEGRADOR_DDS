@@ -1,10 +1,11 @@
 import React from "react";
 import moment from "moment";
 
-function ClientesListado({
+export default function ClientesListado({
   Items,
   Consultar,
   Modificar,
+  Eliminar,
   Pagina,
   RegistrosTotal,
   Paginas,
@@ -16,32 +17,39 @@ function ClientesListado({
         <thead>
           <tr>
             <th className="text-center">Nombre</th>
-            <th className="text-center">Apellido</th>
-            {/* Agregar más columnas según tu modelo de datos de cliente */}
+            <th className="text-center">Email</th>
+            <th className="text-center">Teléfono</th>
             <th className="text-center text-nowrap">Acciones</th>
           </tr>
         </thead>
         <tbody>
           {Items &&
-            Items.map((Item) => (
-              <tr key={Item.IdCliente}>
-                <td>{Item.Nombre}</td>
-                <td>{Item.Apellido}</td>
-                {/* Agregar más columnas según tu modelo de datos de cliente */}
+            Items.map((item) => (
+              <tr key={item.IdCliente}>
+                <td>{item.Nombre}</td>
+                <td>{item.Email}</td>
+                <td>{item.Telefono}</td>
                 <td className="text-center text-nowrap">
                   <button
                     className="btn btn-sm btn-outline-primary"
                     title="Consultar"
-                    onClick={() => Consultar(Item)}
+                    onClick={() => Consultar(item)}
                   >
                     <i className="fa fa-eye"></i>
                   </button>
                   <button
                     className="btn btn-sm btn-outline-primary"
                     title="Modificar"
-                    onClick={() => Modificar(Item)}
+                    onClick={() => Modificar(item)}
                   >
                     <i className="fa fa-pencil"></i>
+                  </button>
+                  <button
+                    className="btn btn-sm btn-outline-danger"
+                    title="Eliminar"
+                    onClick={() => Eliminar(item)}
+                  >
+                    <i className="fa fa-trash"></i>
                   </button>
                 </td>
               </tr>
@@ -49,6 +57,7 @@ function ClientesListado({
         </tbody>
       </table>
 
+      {/* Paginador */}
       <div className="paginador">
         <div className="row">
           <div className="col">
@@ -75,5 +84,3 @@ function ClientesListado({
     </div>
   );
 }
-
-export default ClientesListado;

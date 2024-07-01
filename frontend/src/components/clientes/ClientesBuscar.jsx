@@ -1,13 +1,7 @@
+// ClientesBuscar.jsx
 import React from "react";
 
-function ClientesBuscar({
-  Nombre,
-  setNombre,
-  Apellido,
-  setApellido,
-  Buscar,
-  Agregar,
-}) {
+export default function ClientesBuscar({ Nombre, setNombre, Buscar, Agregar }) {
   return (
     <form>
       <div className="container-fluid">
@@ -25,22 +19,11 @@ function ClientesBuscar({
               autoFocus
             />
           </div>
-          <div className="col-sm-4 col-md-2">
-            <label className="col-form-label">Apellido:</label>
-          </div>
-          <div className="col-sm-8 col-md-4">
-            <input
-              type="text"
-              className="form-control"
-              onChange={(e) => setApellido(e.target.value)}
-              value={Apellido}
-              maxLength="55"
-            />
-          </div>
         </div>
 
         <hr />
 
+        {/* Botones */}
         <div className="row">
           <div className="col text-center botones">
             <button
@@ -72,5 +55,3 @@ function ClientesBuscar({
     </form>
   );
 }
-
-export default ClientesBuscar;

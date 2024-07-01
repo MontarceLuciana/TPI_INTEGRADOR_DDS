@@ -97,65 +97,71 @@ const Habitaciones = sequelize.define(
   }
 );
 
-const Clientes = sequelize.define(
-  "clientes",
-  {
-    IdCliente: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    Nombre: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: "El nombre del cliente es requerido",
-        },
-        len: {
-          args: [5, 30],
-          msg: "Nombre debe ser tipo caracteres, entre 5 y 30 de longitud",
-        },
+const Clientes = sequelize.define("clientes", {
+  IdCliente: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  Nombre: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        args: true,
+        msg: "El nombre del cliente es requerido",
       },
-    },
-    Email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isEmail: {
-          args: true,
-          msg: "Email debe ser una dirección de correo electrónico válida",
-        },
-      },
-    },
-    Telefono: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          args: true,
-          msg: "El teléfono del cliente es requerido",
-        },
-        len: {
-          args: [7, 15],
-          msg: "El teléfono debe tener entre 7 y 15 caracteres",
-        },
+      len: {
+        args: [5, 30],
+        msg: "Nombre debe ser tipo caracteres, entre 5 y 30 de longitud",
       },
     },
   },
-  {
-    // pasar a mayusculas
-    hooks: {
-      beforeValidate: function (cliente, options) {
-        if (typeof cliente.Nombre === "string") {
-          cliente.Nombre = cliente.Nombre.toUpperCase().trim();
-        }
+  Email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      isEmail: {
+        args: true,
+        msg: "Email debe ser una dirección de correo electrónico válida",
       },
     },
-    timestamps: false,
-  }
-);
+  },
+  Telefono: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        args: true,
+        msg: "El teléfono del cliente es requerido",
+      },
+      len: {
+        args: [7, 15],
+        msg: "El teléfono debe tener entre 7 y 15 caracteres",
+      },
+    },
+  },
+  IdReserva: {
+    type: DataTypes.INTEGER,
+    allowNull: true, // Esto puede ser false si deseas que siempre haya una reserva asociada
+    references: {
+      model: 'reservas', // Nombre de la tabla
+      key: 'IdReserva',
+    },
+  },
+}, {
+  hooks: {
+    beforeValidate: function (cliente, options) {
+      if (typeof cliente.Nombre === "string") {
+        cliente.Nombre = cliente.Nombre.toUpperCase().trim();
+      }
+    },
+  },
+  timestamps: false,
+});
+//VER DE BORRAR ESTO DE MAYUSCULAS PQ NO LO TIENE PACHI
+//CLIENTE TIENE (ID, NOMBRE, EMAIL, TELEFONO)
+//TAREA TIENE (ID, DESCRIPCION, FECHAINICIO, FECHAFIN, IDEMPLEADO)
 
 const Reservas = sequelize.define(
   "reservas",

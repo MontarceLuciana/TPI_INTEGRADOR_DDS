@@ -1,11 +1,8 @@
 // Tareas.jsx
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-
 import { tareasService } from "../../services/tareas.service";
-
 import modalDialogService from "../../services/modalDialog.service";
-
 import TareasBuscar from "./TareasBuscar";
 import TareasListado from "./TareasListado";
 import TareasRegistro from "./TareasRegistro";

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const db = require('../base-orm/sequelize-init');
 
 let arr_ClientesMock = [
   { IdCliente: 1, Nombre: "John Doe", Email: "john.doe@gmail.com", Telefono: "123456789" },

@@ -9,13 +9,10 @@ import { ModalDialog } from './components/ModalDialog';
 import { RequireAuth } from './components/RequiereAuth';
 import { Login } from './components/login/Login';
 import { ReservasListado } from './components/ReservasListado'; // Corrected import path
-import { Clientes } from './components/clientes/Clientes';
-import  ClientesBuscar  from './components/clientes/ClientesBuscar';
-import  ClientesListado  from './components/clientes/ClientesListado';
-import  ClientesRegistro  from './components/clientes/ClientesRegistro';
 import { ClientesJWT } from './components/clientesJWT/ClientesJWT';
 import EmpleadosListado from './components/EmpleadosListado'; // Corrected import path
 import Tareas from './components/tareas/Tareas'; // Corrected import path
+import Clientes from './components/clientes/Clientes'; // Corrected import path
 import HabitacionesJWT from "./components/habitacionesJWT/HabitacionesJWT"; // Importa correctamente como exportación por defecto
 
 function App() {
@@ -39,9 +36,6 @@ function App() {
             />
             <Route path="/reservasListado" element={<ReservasListado />} />
             <Route path="/clientes" element={<Clientes />} />
-            <Route path="/clientesBuscar" element={<ClientesBuscar />} />
-            <Route path="/clientesListado" element={<ClientesListado />} />
-            <Route path="/clientesRegistro" element={<ClientesRegistro />} />
             <Route path="/clientesJWT" element={<ClientesJWT />} />
             <Route path="/empleados" element={<EmpleadosListado/>} />
             <Route path="/tareas" element={<Tareas/>} />

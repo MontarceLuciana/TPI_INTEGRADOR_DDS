@@ -21,7 +21,8 @@ function Habitaciones() {
   const [AccionABMC, setAccionABMC] = useState("L");
 
   const [Nombre, setNombre] = useState("");
-  const [Activo, setActivo] = useState("");
+  const [Activo] = useState("");
+  //SAQUE UN ACTICO, SETACTIVO, PORQUE NO SE USA
 
   const [Items, setItems] = useState(null);
   const [Item, setItem] = useState(null); // usado en BuscarporId (Modificar, Consultar)

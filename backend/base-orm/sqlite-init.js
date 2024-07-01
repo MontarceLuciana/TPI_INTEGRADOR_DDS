@@ -67,20 +67,51 @@ async function CrearBaseSiNoExiste() {
     `);
   }
 
+ 
+
   // Verificar y crear tabla clientes
-  existe = false;
-  res = await db.get("SELECT count(*) as contar FROM sqlite_master WHERE type = 'table' AND name = 'clientes'");
-  if (res.contar > 0) existe = true;
-  if (!existe) {
-    await db.run("CREATE TABLE clientes (IdCliente INTEGER PRIMARY KEY AUTOINCREMENT, Nombre TEXT NOT NULL, Email TEXT NOT NULL, Telefono TEXT NOT NULL);");
-    console.log("Tabla clientes creada!");
-    await db.run(`
-      INSERT INTO clientes (Nombre, Email, Telefono) VALUES
-        ('Carlos', 'carlos@example.com', '123456789'),
-        ('María', 'maria@example.com', '987654321'),
-        ('José', 'jose@example.com', '456123789'),
-        ('Ana', 'ana@example.com', '321456987'),
-        ('Luis', 'luis@example.com', '654789123');
+existe = false;
+res = await db.get("SELECT count(*) as contar FROM sqlite_master WHERE type = 'table' AND name = 'clientes'");
+if (res.contar > 0) existe = true;
+if (!existe) {
+  await db.run(
+    `CREATE TABLE clientes (
+      IdCliente INTEGER PRIMARY KEY AUTOINCREMENT,
+      Nombre TEXT NOT NULL,
+      Email TEXT NOT NULL,
+      Telefono TEXT NOT NULL,
+      IdReserva INTEGER,
+      FOREIGN KEY(IdReserva) REFERENCES reservas(IdReserva)
+    );`
+  )
+  console.log("Tabla clientes creada!");
+  await db.run(`
+    INSERT INTO clientes (Nombre, Email, Telefono, IdReserva) VALUES
+        ('Carlos', 'carlos@example.com', '123456789', 1),
+        ('María', 'maria@example.com', '987654321', 2),
+        ('José', 'jose@example.com', '456123789', 3),
+        ('Ana', 'ana@example.com', '321456987', 4),
+        ('Luis', 'luis@example.com', '654789123', 5),
+        ('Laura', 'laura@example.com', '555555555', 6),
+        ('Pedro', 'pedro@example.com', '777777777', 7),
+        ('Marta', 'marta@example.com', '888888888', 8),
+        ('Juan', 'juan@example.com', '999999999', 9),
+        ('Lucía', 'lucia@example.com', '666666666', 11);
+        ('Benja', 'benja@example.com', '123901231', 12);
+        ('Ramon', 'ramon@example.com', '123901283', 13);
+        ('Hernesto', 'hernesto@example.com', '139012831', 14);
+        ('Joaquin', 'joaquin@example.com', '123901283', 15);
+        ('Lucas', 'lucas@example.com', '123902183', 16);
+        ('Alan', 'alan@example.com', '120391298', 17);
+        ('Ivan', 'ivan@example.com', '666666666', 18);
+        ('Valentin', 'valentin@example.com', '98293821', 19);
+        ('Micaela', 'micaela@example.com', '29238192', 20);
+        ('Monica', 'monica@example.com', '84738192', 21);
+        ('Pajaro', 'pajaro@example.com', '72629129', 22);
+        ('Facundo', 'facundo@example.com', '452163921', 23);
+        ('Felipe', 'felipe@example.com', '23139312', 24);
+        ('Gaston', 'gaston@example.com', '20923823', 25);
+
     `);
   }
 
@@ -100,7 +131,7 @@ async function CrearBaseSiNoExiste() {
     console.log("Tabla reservas creada!");
     await db.run(`
       INSERT INTO reservas (Cliente, Fecha, Habitacion) VALUES
-        ('John Doe', '2024-06-27', '101'),
+    ('John Doe', '2024-06-27', '101'),
     ('Jane Doe', '2024-06-28', '102'),
     ('María González', '2024-06-29', '103'),
     ('Carlos Pérez', '2024-06-30', '104'),

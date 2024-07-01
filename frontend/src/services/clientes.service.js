@@ -12,8 +12,8 @@ async function Buscar(Nombre, Pagina) {
   return resp.data;
 }
 
-async function BuscarPorId(item) {
-  const resp = await httpService.get(urlResource + "/" + item.IdCliente);
+async function BuscarPorId(id) {
+  const resp = await httpService.get(urlResource + "/" + id);
   return resp.data;
 }
 
@@ -21,17 +21,35 @@ async function ActivarDesactivar(item) {
   await httpService.delete(urlResource + "/" + item.IdCliente);
 }
 
+
+async function Eliminar(id) {
+  console.log(urlResource + "/" + id);
+  await httpService.delete(urlResource + "/" + id);
+  
+}
+
 async function Grabar(item) {
-  if (item.IdCliente === 0) {
-    await httpService.post(urlResource, item);
+  if (item.IdCliente) {
+    await httpService.put(urlResource + "/" + item.IdCliente, {
+      Nombre: item.Nombre,
+      Email: item.Email,
+      Telefono: item.Telefono
+    });
   } else {
-    await httpService.put(urlResource + "/" + item.IdCliente, item);
+    await httpService.post(urlResource, {
+      Nombre: item.Nombre,
+      Email: item.Email,
+      Telefono: item.Telefono
+    });
   }
 }
+
+
 
 export const clientesService = {
   Buscar,
   BuscarPorId,
   ActivarDesactivar,
+  Eliminar,
   Grabar,
 };
