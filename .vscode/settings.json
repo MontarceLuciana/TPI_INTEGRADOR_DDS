@@ -1,0 +1,6 @@
+{
+    "git.enabled": false,
+    "git.ignoreLimitWarning": true,
+    "gitlab.duoChat.enabled": false,
+    "github.copilot.editor.enableAutoCompletions": false
+}
