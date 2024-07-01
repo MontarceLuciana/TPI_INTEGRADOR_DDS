@@ -21,56 +21,44 @@ function Gastronomia() {
   const [AccionABMC, setAccionABMC] = useState("L");
 
   const [Nombre, setNombre] = useState("");
-  //const [Activo, setActivo] = useState("");
-
   const [Items, setItems] = useState(null);
-  const [Item, setItem] = useState(null); // usado en BuscarporId (Modificar, Consultar)
+  const [Item, setItem] = useState(null);
   const [RegistrosTotal, setRegistrosTotal] = useState(0);
   const [Pagina, setPagina] = useState(1);
   const [Paginas, setPaginas] = useState([]);
-
   const [Eventos, setEventos] = useState(null);
 
-// cargar al "montar" el componente, solo la primera vez (por la dependencia [])
-useEffect(() => {
-  async function BuscarEventos() {
-    let data = await EventosService.Buscar();
-    setEventos(data);
-  }
-  BuscarEventos();
-}, []);
+  useEffect(() => {
+    async function BuscarEventos() {
+      let data = await EventosService.Buscar();
+      setEventos(data);
+    }
+    BuscarEventos();
+  }, []);
 
-async function Buscar(_pagina) {
-  if (_pagina && _pagina !== Pagina) {
-    setPagina(_pagina);
-  }
-  // OJO Pagina (y cualquier estado...) se actualiza para el proximo render, para buscar usamos el parametro _pagina
-  else {
-    _pagina = Pagina;
-  }
-  modalDialogService.BloquearPantalla(true);
-  const data = await gastronomiaService.Buscar(Nombre, _pagina);
-  modalDialogService.BloquearPantalla(false);
-  setItems(data.Items);
-  setRegistrosTotal(data.RegistrosTotal);
+  async function Buscar(_pagina) {
+    if (_pagina && _pagina !== Pagina) {
+      setPagina(_pagina);
+    } else {
+      _pagina = Pagina;
+    }
 
-  try {
-    const data = await gastronomiaService.Buscar(Nombre, _pagina); // Asegúrate de pasar Nombre al servicio de búsqueda
-    setItems(data.Items);
-    setRegistrosTotal(data.RegistrosTotal);
+    modalDialogService.BloquearPantalla(true);
+    try {
+      const data = await gastronomiaService.Buscar(Nombre, _pagina);
+      setItems(data.Items);
+      setRegistrosTotal(data.RegistrosTotal);
 
-  //generar array de las páginas para mostrar en select del paginador
-  const arrPaginas = [];
-  for (let i = 1; i <= Math.ceil(data.RegistrosTotal / 10); i++) {
-    arrPaginas.push(i);
+      const arrPaginas = [];
+      for (let i = 1; i <= Math.ceil(data.RegistrosTotal / 10); i++) {
+        arrPaginas.push(i);
+      }
+      setPaginas(arrPaginas);
+    } catch (error) {
+      modalDialogService.Alert(error?.response?.data?.message ?? error.toString());
+    }
+    modalDialogService.BloquearPantalla(false);
   }
-  setPaginas(arrPaginas);
-} catch (error) {
-  modalDialogService.Alert(error?.response?.data?.message ?? error.toString());
-}
-
-modalDialogService.BloquearPantalla(false);
-}
 
   async function BuscarPorId(item, accionABMC) {
     const data = await gastronomiaService.BuscarPorId(item);
@@ -79,15 +67,14 @@ modalDialogService.BloquearPantalla(false);
   }
 
   function Consultar(item) {
-    BuscarPorId(item, "C"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+    BuscarPorId(item, "C");
   }
   function Modificar(item) {
     if (!item) {
-      // alert("No puede modificarse un registro Inactivo.");
       modalDialogService.Alert("No puede modificarse un registro Inactivo.");
       return;
     }
-    BuscarPorId(item, "M"); // paso la accionABMC pq es asincrono la busqueda y luego de ejecutarse quiero cambiar el estado accionABMC
+    BuscarPorId(item, "M");
   }
 
   async function Agregar() {
@@ -100,7 +87,6 @@ modalDialogService.BloquearPantalla(false);
       FechaCreacion: moment(new Date()).format("DD/MM/YYYY"),
       IdEventos: "",
     });
-    // modalDialogService.Alert("preparando el Alta...");
   }
 
   async function Eliminar(item) {
@@ -117,7 +103,6 @@ modalDialogService.BloquearPantalla(false);
   }
 
   async function Grabar(item) {
-    // agregar o modificar
     try {
       await gastronomiaService.Grabar(item);
     } catch (error) {
@@ -127,16 +112,13 @@ modalDialogService.BloquearPantalla(false);
     await Buscar();
     Volver();
 
-    // setTimeout(() => {
     modalDialogService.Alert(
       "Registro " +
         (AccionABMC === "A" ? "agregado" : "modificado") +
         " correctamente."
     );
-    // }, 0);
   }
 
-  // Volver/Cancelar desde Agregar/Modificar/Consultar
   function Volver() {
     setAccionABMC("L");
   }
@@ -156,7 +138,6 @@ modalDialogService.BloquearPantalla(false);
         />
       )}
 
-      {/* Tabla de resultados de busqueda y Paginador */}
       {AccionABMC === "L" && Items?.length > 0 && (
         <GastronomiaListado
           {...{
@@ -179,10 +160,9 @@ modalDialogService.BloquearPantalla(false);
         </div>
       )}
 
-      {/* Formulario de alta/modificacion/consulta */}
       {AccionABMC !== "L" && (
         <GastronomiaRegistro
-          {...{ AccionABMC, Eventos,Item, Grabar, Volver }}
+          {...{ AccionABMC, Eventos, Item, Grabar, Volver }}
         />
       )}
     </div>
@@ -190,3 +170,4 @@ modalDialogService.BloquearPantalla(false);
 }
 
 export { Gastronomia };
+

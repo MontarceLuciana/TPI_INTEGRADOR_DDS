@@ -1,7 +1,7 @@
 import React from "react";
-export default function GastronomiaBuscar ({Nombre, setNombre, Buscar, Agregar}) {
 
-    return (
+export default function GastronomiaBuscar({ Nombre, setNombre, Buscar, Agregar }) {
+  return (
     <form>
       <div className="container-fluid">
         <div className="row">
@@ -19,20 +19,11 @@ export default function GastronomiaBuscar ({Nombre, setNombre, Buscar, Agregar})
             />
           </div>
         </div>
-  
+
         <hr />
-  
-        {/* Botones */}
+
         <div className="row">
           <div className="col text-center botones">
-            <button
-              type="button"
-              className="btn btn-primary"
-              onClick={() => Buscar(1)}
-            >
-              <i className="fa fa-list"> </i> Listar todo
-            </button>
-
             <button
               type="button"
               className="btn btn-primary"

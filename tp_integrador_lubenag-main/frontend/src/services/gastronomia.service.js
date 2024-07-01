@@ -1,8 +1,7 @@
 import httpService from "./http.service";
-import {config} from "../config";
+import { config } from "../config";
 
 const urlResource = config.urlResourceGastronomia;
-
 
 async function Buscar(Nombre, Pagina) {
   const resp = await httpService.get(urlResource, {
@@ -11,16 +10,13 @@ async function Buscar(Nombre, Pagina) {
   return resp.data;
 }
 
-
 async function BuscarPorId(item) {
   const resp = await httpService.get(urlResource + "/" + item.IdGastronomia);
   return resp.data;
 }
 
 async function Eliminar(id) {
-  console.log(urlResource + "/" + id);
   await httpService.delete(urlResource + "/" + id);
-  
 }
 
 async function Grabar(item) {
@@ -31,7 +27,9 @@ async function Grabar(item) {
   }
 }
 
-
 export const gastronomiaService = {
-  Buscar,BuscarPorId,Eliminar,Grabar,
+  Buscar,
+  BuscarPorId,
+  Eliminar,
+  Grabar,
 };

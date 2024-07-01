@@ -43,11 +43,7 @@ function Menu() {
                 Inicio
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/eventos">
-                Tipos de Eventos
-              </NavLink>
-            </li>
+            
             <li className="nav-item">
               <NavLink className="nav-link" to="/gastronomia">
                 Gastronomia

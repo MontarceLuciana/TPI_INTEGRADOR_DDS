@@ -6,6 +6,15 @@ const auth = require("../seguridad/auth");
 
 router.get("/api/gastronomia", async function (req, res, next) {
   try {
+    const { Nombre, Pagina } = req.query;
+    const whereClause = {};
+
+    if (Nombre) {
+      whereClause.Nombre = {
+        [Op.like]: `%${Nombre}%`
+      };
+    }
+
     const { count, rows } = await db.Gastronomia.findAndCountAll({
       attributes: [
         "IdGastronomia",
@@ -15,10 +24,12 @@ router.get("/api/gastronomia", async function (req, res, next) {
         "FechaCreacion",
         "IdEventos",
       ],
+      where: whereClause,
       order: [["Nombre", "ASC"]],
-      offset: (req.query.Pagina - 1) * 10,
+      offset: (Pagina - 1) * 10,
       limit: 10,
     });
+
     res.json({ Items: rows, RegistrosTotal: count });
   } catch (error) {
     next(error);
