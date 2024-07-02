@@ -35,14 +35,16 @@ app.get("/", (req, res) => {
   res.send("dds-backend iniciado!");
 });
 
-const serviciosListadomockRouter = require("./routes/serviciosListadoMock");
-app.use(serviciosListadomockRouter);
+// Rutas para eventos
+const eventosMockRouter = require("./routes/eventosMock");
+app.use(eventosMockRouter);
 
-const serviciosListadoRouter = require("./routes/serviciosListado");
-app.use(serviciosListadoRouter);
+const eventosRouter = require("./routes/eventos");
+app.use(eventosRouter);
 
-const habitacionesmockRouter = require("./routes/habitaciones");
-app.use(habitacionesmockRouter);
+// Rutas para gastronomía
+const gastronomiaRouter = require("./routes/gastronomia");
+app.use(gastronomiaRouter);
 
 const reservasmockRouter = require("./routes/reservasMock");
 app.use(reservasmockRouter);

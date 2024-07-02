@@ -1,9 +1,9 @@
 // src/config.js
 const urlServidor = "http://localhost:4000"; // Ajusta según tu entorno
 
-const urlResourceHabitaciones = urlServidor + "/api/habitaciones";
-const urlResourceHabitacionesJWT = urlServidor + "/api/habitacionesjwt";
-const urlResourceServiciosListado = urlServidor + "/api/serviciosListado";
+const urlResourceGastronomia = urlServidor + "/api/gastronomia";
+const urlResourceGastronomiaJWT = urlServidor + "/api/gastronomiajwt";
+const urlResourceEventos = urlServidor + "/api/eventos";
 
 const urlResourceClientes = urlServidor + "/api/clientes";
 const urlResourceClientesJWT = urlServidor + "/api/clientesjwt";
@@ -13,9 +13,9 @@ const urlResourceTareas = urlServidor + "/api/tareas"; // URL para tareas
 
 export const config = {
     urlServidor,
-    urlResourceHabitaciones,
-    urlResourceHabitacionesJWT,
-    urlResourceServiciosListado,
+    urlResourceGastronomia,
+    urlResourceGastronomiaJWT,
+    urlResourceEventos,
     urlResourceClientes,
     urlResourceReservas,
     urlResourceClientesJWT,

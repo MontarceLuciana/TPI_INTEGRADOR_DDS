@@ -1,14 +1,14 @@
 const { Sequelize, DataTypes } = require("sequelize");
-// const sequelize = new Sequelize("sqlite:" + process.env.base);
+
 const sequelize = new Sequelize("sqlite:" + "./.data/hotel.db");
 
 // ######################### TO DO: Agregar HOOKS a los modelos para validar los datos
 // Definimos los modelos
 
-const ServiciosListado = sequelize.define(
-  "serviciosListado",
+const Eventos = sequelize.define(
+  "eventos",
   {
-    IdServiciosListado: {
+    IdEventos: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -19,11 +19,39 @@ const ServiciosListado = sequelize.define(
       validate: {
         notEmpty: {
           args: true,
-          msg: "El nombre del servicio es requerido",
+          msg: "El nombre del evento es requerido",
         },
         len: {
           args: [5, 30],
           msg: "Nombre debe ser tipo caracteres, entre 5 y 30 de longitud",
+        },
+      },
+    },
+    Descripcion: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "La descripcion del evento es requerido",
+        },
+        len: {
+          args: [5, 200],
+          msg: "Descripcion debe ser tipo caracteres, entre 5 y 200 de longitud",
+        },
+      },
+    },
+    CantidadMaxima: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "La cantidad maxima es requerida",
+        },
+        len: {
+          args: [1, 15],
+          msg: "La cantidad maxima debe tener entre 1 y 15 caracteres",
         },
       },
     },
@@ -31,9 +59,9 @@ const ServiciosListado = sequelize.define(
   {
     // pasar a mayusculas
     hooks: {
-      beforeValidate: function (autor, options) {
-        if (typeof autor.Nombre === "string") {
-          autor.Nombre = autor.Nombre.toUpperCase().trim();
+      beforeValidate: function (eventos, options) {
+        if (typeof eventos.Nombre === "string") {
+          eventos.Nombre = eventos.Nombre.toUpperCase().trim();
         }
       },
     },
@@ -41,10 +69,10 @@ const ServiciosListado = sequelize.define(
   }
 );
 
-const Habitaciones = sequelize.define(
-  "habitaciones",
+const Gastronomia = sequelize.define(
+  "gastronomia",
   {
-    IdHabitaciones: {
+    IdGastronomia: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -55,21 +83,27 @@ const Habitaciones = sequelize.define(
       validate: {
         notEmpty: {
           args: true,
-          msg: "El nombre de la habitación es requerido",
+          msg: "El nombre del menú es requerido",
         },
         len: {
           args: [5, 30],
-          msg: "Nombre debe ser tipo caracteres, entre 5 y 30 de longitud",
+          msg: "Nombre debe tener entre 5 y 30 caracteres de longitud",
         },
       },
     },
-    FechaIngreso: {
+    Descripcion: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    IdServiciosListado: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: "La descripción del menú es requerida",
+        },
+        len: {
+          args: [5, 200],
+          msg: "Descripción debe tener entre 5 y 200 caracteres de longitud",
+        },
+      },
     },
     Precio: {
       type: DataTypes.DECIMAL(10, 2),
@@ -81,21 +115,33 @@ const Habitaciones = sequelize.define(
         },
       },
     },
-    Disponible: {
-      type: DataTypes.BOOLEAN,
+    FechaCreacion: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    IdEventos: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notNull: {
           args: true,
-          msg: "Disponible es requerido",
+          msg: "IdEventos es requerido",
         },
       },
     },
   },
   {
+    hooks: {
+      beforeValidate: function (gastronomia, options) {
+        if (typeof gastronomia.Nombre === "string") {
+          gastronomia.Nombre = gastronomia.Nombre.toUpperCase().trim();
+        }
+      },
+    },
     timestamps: false,
   }
 );
+
 
 const Clientes = sequelize.define("clientes", {
   IdCliente: {
@@ -324,10 +370,11 @@ const Tareas = sequelize.define('tareas', {
   timestamps: false,
 });
 
+
 module.exports = {
   sequelize,
-  ServiciosListado,
-  Habitaciones,
+  Eventos,
+  Gastronomia,
   Clientes,
   Reservas,
   Empleados,  // <-- añadido

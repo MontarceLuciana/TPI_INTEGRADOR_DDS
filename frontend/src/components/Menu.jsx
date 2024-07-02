@@ -43,14 +43,10 @@ function Menu() {
                 Inicio
               </NavLink>
             </li>
+            
             <li className="nav-item">
-              <NavLink className="nav-link" to="/serviciosListado">
-                Servicio Listado
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/habitaciones">
-                Habitaciones
+              <NavLink className="nav-link" to="/gastronomia">
+                Gastronomia
               </NavLink>
             </li>
             <li className="nav-item">
